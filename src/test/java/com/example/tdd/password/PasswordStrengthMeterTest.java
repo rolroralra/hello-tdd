@@ -66,4 +66,12 @@ public class PasswordStrengthMeterTest {
         PasswordStrength result = meter.meter(givenPassword);
         assertThat(result).isEqualTo(PasswordStrength.WEAK);
     }
+
+    @DisplayName("대문자 포함 조건만 충족하는 경우, WEAK을 반환한다.")
+    @ParameterizedTest(name = "\"{0}\" 은 WEAK 비밀번호입니다.")
+    @ValueSource(strings = {"ABZEF"})
+    void meetsOnlyUppercaseCriteria_Then_Weak(String givenPassword) {
+        PasswordStrength result = meter.meter(givenPassword);
+        assertThat(result).isEqualTo(PasswordStrength.WEAK);
+    }
 }
