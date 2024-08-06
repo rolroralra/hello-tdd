@@ -26,4 +26,11 @@ public class PasswordStrengthMeterTest {
         assertThat(result).isEqualTo(PasswordStrength.NORMAL);
     }
 
+    @DisplayName("숫자를 포함하지 않고 나머지 조건은 충족하는 경우, 보통을 반환한다.")
+    @ParameterizedTest(name = "\"{0}\" 은 NORMAL 비밀번호입니다.")
+    @ValueSource(strings = {"ab!@ABqwer"})
+    void meetsOtherCriteria_except_for_Number_Then_Normal(String givenPassword) {
+        PasswordStrength result = meter.meter(givenPassword);
+        assertThat(result).isEqualTo(PasswordStrength.NORMAL);
+    }
 }
