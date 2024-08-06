@@ -42,4 +42,12 @@ public class PasswordStrengthMeterTest {
         PasswordStrength result = meter.meter(givenPassword);
         assertThat(result).isEqualTo(PasswordStrength.INVALID);
     }
+
+    @DisplayName("대문자를 포함하지 않고 나머지 조건은 충족하는 경우, NORMAL을 반환한다.")
+    @ParameterizedTest(name = "\"{0}\" 은 NORMAL 비밀번호입니다.")
+    @ValueSource(strings = {"ab12!@df", "abc12!@dd"})
+    void meetsOtherCriteria_except_for_Uppercase_Then_Normal(String givenPassword) {
+        PasswordStrength result = meter.meter(givenPassword);
+        assertThat(result).isEqualTo(PasswordStrength.NORMAL);
+    }
 }

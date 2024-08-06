@@ -3,6 +3,7 @@ package com.example.tdd.password;
 import com.example.tdd.password.criteria.PasswordCriteria;
 import com.example.tdd.password.criteria.PasswordLengthCriteria;
 import com.example.tdd.password.criteria.PasswordNumberCriteria;
+import com.example.tdd.password.criteria.PasswordUppercaseCriteria;
 import com.example.tdd.password.policy.DefaultPasswordStrengthMeterPolicy;
 import com.example.tdd.password.policy.PasswordStrengthMeterPolicy;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +14,8 @@ public class PasswordStrengthMeter {
 
     private final List<PasswordCriteria> criteria = List.of(
         new PasswordLengthCriteria(),
-        new PasswordNumberCriteria()
+        new PasswordNumberCriteria(),
+        new PasswordUppercaseCriteria()
     );
 
     private final PasswordStrengthMeterPolicy policy = new DefaultPasswordStrengthMeterPolicy();
