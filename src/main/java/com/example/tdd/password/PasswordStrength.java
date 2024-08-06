@@ -5,6 +5,7 @@ import java.util.Arrays;
 public enum PasswordStrength {
     STRONG(0),
     NORMAL(1),
+    WEAK(2),
     INVALID(null);
 
     public final Integer allowableCount;

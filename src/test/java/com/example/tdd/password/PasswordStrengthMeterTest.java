@@ -36,7 +36,7 @@ public class PasswordStrengthMeterTest {
     }
 
     @DisplayName("값이 없는 경우, INVALID를 반환한다.")
-    @ParameterizedTest
+    @ParameterizedTest(name = "\"{0}\" 은 INVALID 비밀번호입니다.")
     @NullAndEmptySource
     void nullOrEmpty_Then_Invalid(String givenPassword) {
         PasswordStrength result = meter.meter(givenPassword);
@@ -49,5 +49,13 @@ public class PasswordStrengthMeterTest {
     void meetsOtherCriteria_except_for_Uppercase_Then_Normal(String givenPassword) {
         PasswordStrength result = meter.meter(givenPassword);
         assertThat(result).isEqualTo(PasswordStrength.NORMAL);
+    }
+
+    @DisplayName("길이가 8글자 이상인 조건만 충족하는 경우, WEAK을 반환한다.")
+    @ParameterizedTest(name = "\"{0}\" 은 WEAK 비밀번호입니다.")
+    @ValueSource(strings = {"abdefghi"})
+    void meetsOnlyLengthCriteria_Then_Weak(String givenPassword) {
+        PasswordStrength result = meter.meter(givenPassword);
+        assertThat(result).isEqualTo(PasswordStrength.WEAK);
     }
 }
