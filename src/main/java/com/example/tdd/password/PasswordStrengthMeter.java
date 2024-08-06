@@ -17,7 +17,6 @@ public class PasswordStrengthMeter {
 
     private final PasswordStrengthMeterPolicy policy = new DefaultPasswordStrengthMeterPolicy();
 
-    @SuppressWarnings("unused") // TODO: Remove this line and implement the method
     public PasswordStrength meter(String password) {
         return policy.meter(password, criteria);
     }
