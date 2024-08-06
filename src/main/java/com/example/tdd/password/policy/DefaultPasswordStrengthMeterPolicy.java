@@ -9,7 +9,8 @@ public class DefaultPasswordStrengthMeterPolicy implements PasswordStrengthMeter
     @Override
     public PasswordStrength meter(String password, List<PasswordCriteria> criteria) {
         long verifiedCount = criteria.stream().filter(c -> c.verify(password)).count();
+        long allowableCount = criteria.size() - verifiedCount;
 
-        return PasswordStrength.fromAllowableCount(criteria.size() - verifiedCount);
+        return PasswordStrength.fromAllowableCount(allowableCount);
     }
 }

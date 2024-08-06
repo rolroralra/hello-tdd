@@ -74,4 +74,12 @@ public class PasswordStrengthMeterTest {
         PasswordStrength result = meter.meter(givenPassword);
         assertThat(result).isEqualTo(PasswordStrength.WEAK);
     }
+
+    @DisplayName("아무 조건도 충족하지 않는 경우, WEAK을 반환한다.")
+    @ParameterizedTest(name = "\"{0}\" 은 WEAK 비밀번호입니다.")
+    @ValueSource(strings = {"ABZEF"})
+    void meetsNoCriteria_Then_Weak(String givenPassword) {
+        PasswordStrength result = meter.meter(givenPassword);
+        assertThat(result).isEqualTo(PasswordStrength.WEAK);
+    }
 }
