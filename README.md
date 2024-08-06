@@ -81,3 +81,11 @@
 ## 참고자료
 - [JUnit 4 Documentation](https://junit.org/junit4/)
 - [JUnit 5 Documentation](https://junit.org/junit5/)
+
+# TDD
+```mermaid
+flowchart LR
+   t([테스트]) ---> c([코딩]) 
+   c ---> r([리팩터링])
+   r ---> t
+```
