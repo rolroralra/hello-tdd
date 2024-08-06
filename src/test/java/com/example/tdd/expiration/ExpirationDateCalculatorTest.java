@@ -19,8 +19,8 @@ class ExpirationDateCalculatorTest {
     )
     @DisplayName("만원 납부하면 한 달 뒤에 만료일이 됨 (납부일과 만료일이 같은 날인 경우)")
     void 만원_납부하면_한달_뒤가_만료일이_됨(LocalDate billingDate, LocalDate expectedExpirationDate) {
-        LocalDate expirationDate = expirationDateCalculator.calculateExpireDate(billingDate,
-            10_000);
+        LocalDate expirationDate = expirationDateCalculator.calculateExpireDate(
+            new PaymentData(billingDate, 10_000));
 
         assertThat(expirationDate).isEqualTo(expectedExpirationDate);
     }
@@ -36,8 +36,8 @@ class ExpirationDateCalculatorTest {
     )
     @DisplayName("만원 납부하면 한 달 뒤에 만료일이 됨 (납부일과 만료일이 다른 날인 경우)")
     void 납부일과_만료일이_다른_날인_경우_만원_납부하면_한달_뒤가_만료일이_됨(LocalDate billingDate, LocalDate expectedExpirationDate) {
-        LocalDate expirationDate = expirationDateCalculator.calculateExpireDate(billingDate,
-            10_000);
+        LocalDate expirationDate = expirationDateCalculator.calculateExpireDate(
+            new PaymentData(billingDate, 10_000));
 
         assertThat(expirationDate).isEqualTo(expectedExpirationDate);
     }
