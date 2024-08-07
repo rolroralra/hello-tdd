@@ -52,13 +52,14 @@ class ExpirationDateCalculatorTest {
     @ParameterizedTest(name = "첫 납부일이 {0}이고 {1} 납부하면, {2} 만료일이 됨 ")
     @CsvSource(
         value = {
-            "2019-01-31, 2019-02-28, 2021-03-31",
+            "2019-01-31, 2019-02-28, 2019-03-31",
         }
     )
     @DisplayName("첫 납부일과 만료일 일자가 다를때 만원 납부하면 첫 납부일 기준으로 다음 만료일이 계산됨")
-    void 첫_납부일과_만료일_일자가_다를때_만원_납부하면_첫_납부일_기준으로_다음_만료일이_계산됨(LocalDate billingDate, LocalDate expectedExpirationDate) {
+    void 첫_납부일과_만료일_일자가_다를때_만원_납부하면_첫_납부일_기준으로_다음_만료일이_계산됨(LocalDate firstBillingDate, LocalDate billingDate, LocalDate expectedExpirationDate) {
         LocalDate expirationDate = expirationDateCalculator.calculateExpireDate(
             PaymentData.builder()
+                .firstBillingDate(firstBillingDate)
                 .billingDate(billingDate)
                 .payAmount(10_000)
                 .build());
