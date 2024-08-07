@@ -53,6 +53,7 @@ class ExpirationDateCalculatorTest {
     @CsvSource(
         value = {
             "2019-01-31, 2019-02-28, 2019-03-31",
+            "2019-01-30, 2019-02-28, 2019-03-30",
         }
     )
     @DisplayName("첫 납부일과 만료일 일자가 다를때 만원 납부하면 첫 납부일 기준으로 다음 만료일이 계산됨")
