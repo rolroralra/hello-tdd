@@ -67,4 +67,48 @@ class ExpirationDateCalculatorTest {
 
         assertThat(expirationDate).isEqualTo(expectedExpirationDate);
     }
+
+    @ParameterizedTest(name = "납부일이 {0}이고 {1}원 납부하면, {2} 만료일이 됨 ")
+    @CsvSource(
+        value = {
+            "2021-01-21, 20000, 2021-03-21",
+            "2021-02-28, 30000, 2021-05-28",
+            "2021-03-31, 20000, 2021-05-31",
+            "2021-01-31, 30000, 2021-04-30",
+            "2021-05-31, 20000, 2021-07-31",
+            "2020-01-31, 30000, 2020-04-30",
+        }
+    )
+    @DisplayName("2만원 이상 납부하면 비례해서 만료일이 계산된다.")
+    void 이만원_이상_납부하면_비례해서_만료일이_계산됨(LocalDate billingDate, int payAmount, LocalDate expectedExpirationDate) {
+        LocalDate expirationDate = expirationDateCalculator.calculateExpireDate(
+            PaymentData.builder()
+                .billingDate(billingDate)
+                .payAmount(payAmount)
+                .build());
+
+        assertThat(expirationDate).isEqualTo(expectedExpirationDate);
+    }
+
+    @ParameterizedTest(name = "첫 납부일이 {0}이고 {1}에 {2}원 납부하면, {3} 만료일이 됨 ")
+    @CsvSource(
+        value = {
+            "2019-01-31, 2019-02-28, 20000, 2019-04-30",
+            "2019-01-31, 2019-02-28, 30000, 2019-05-31",
+        }
+    )
+    @DisplayName("첫 납부일과 만료일 일자가 다를때 만원이상 납부하면 첫 납부일 기준으로 납부액과 비례해서 다음 만료일이 계산됨")
+    void 첫_납부일과_만료일_일자가_다를때_만원이상_납부하면_첫_납부일_기준으로_납부액에_비례해서_다음_만료일이_계산됨(
+        LocalDate firstBillingDate, LocalDate billingDate, int payAmount,
+        LocalDate expectedExpirationDate
+    ) {
+        LocalDate expirationDate = expirationDateCalculator.calculateExpireDate(
+            PaymentData.builder()
+                .firstBillingDate(firstBillingDate)
+                .billingDate(billingDate)
+                .payAmount(payAmount)
+                .build());
+
+        assertThat(expirationDate).isEqualTo(expectedExpirationDate);
+    }
 }

@@ -7,7 +7,6 @@ import java.util.Optional;
 public class ExpirationDateCalculator {
 
     public static final int PAYMENT_PRICE = 10_000;
-    public static final int ONE_MONTH = 1;
 
     public LocalDate calculateExpireDate(PaymentData paymentData) {
         Preconditions.checkArgument(
@@ -15,10 +14,20 @@ public class ExpirationDateCalculator {
             "납부 금액은 %s원 이상이어야 합니다.", PAYMENT_PRICE
         );
 
-        LocalDate expirationDate = paymentData.billingDate().plusMonths(ONE_MONTH);
+        int addedMonth = paymentData.payAmount() / PAYMENT_PRICE;
+
+        LocalDate expirationDate = paymentData.billingDate().plusMonths(addedMonth);
 
         return Optional.ofNullable(paymentData.firstBillingDate())
-            .map(firstBillingDate -> expirationDate.withDayOfMonth(firstBillingDate.getDayOfMonth()))
+            .map(firstBillingDate -> getLocalDateWithDayOfMonth(expirationDate, firstBillingDate.getDayOfMonth()))
             .orElse(expirationDate);
+    }
+
+    private LocalDate getLocalDateWithDayOfMonth(LocalDate localDate, int dayOfMonth) {
+        if (dayOfMonth > localDate.lengthOfMonth()) {
+            return localDate.withDayOfMonth(localDate.lengthOfMonth());
+        }
+
+        return localDate.withDayOfMonth(dayOfMonth);
     }
 }
