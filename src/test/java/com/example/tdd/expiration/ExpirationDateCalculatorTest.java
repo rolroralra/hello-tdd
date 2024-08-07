@@ -20,7 +20,11 @@ class ExpirationDateCalculatorTest {
     @DisplayName("만원 납부하면 한 달 뒤에 만료일이 됨 (납부일과 만료일이 같은 날인 경우)")
     void 만원_납부하면_한달_뒤가_만료일이_됨(LocalDate billingDate, LocalDate expectedExpirationDate) {
         LocalDate expirationDate = expirationDateCalculator.calculateExpireDate(
-            new PaymentData(billingDate, 10_000));
+            PaymentData.builder()
+                .billingDate(billingDate)
+                .payAmount(10_000)
+                .build()
+           );
 
         assertThat(expirationDate).isEqualTo(expectedExpirationDate);
     }
@@ -37,7 +41,27 @@ class ExpirationDateCalculatorTest {
     @DisplayName("만원 납부하면 한 달 뒤에 만료일이 됨 (납부일과 만료일이 다른 날인 경우)")
     void 납부일과_만료일이_다른_날인_경우_만원_납부하면_한달_뒤가_만료일이_됨(LocalDate billingDate, LocalDate expectedExpirationDate) {
         LocalDate expirationDate = expirationDateCalculator.calculateExpireDate(
-            new PaymentData(billingDate, 10_000));
+            PaymentData.builder()
+                .billingDate(billingDate)
+                .payAmount(10_000)
+                .build());
+
+        assertThat(expirationDate).isEqualTo(expectedExpirationDate);
+    }
+
+    @ParameterizedTest(name = "첫 납부일이 {0}이고 {1} 납부하면, {2} 만료일이 됨 ")
+    @CsvSource(
+        value = {
+            "2019-01-31, 2019-02-28, 2021-03-31",
+        }
+    )
+    @DisplayName("첫 납부일과 만료일 일자가 다를때 만원 납부하면 첫 납부일 기준으로 다음 만료일이 계산됨")
+    void 첫_납부일과_만료일_일자가_다를때_만원_납부하면_첫_납부일_기준으로_다음_만료일이_계산됨(LocalDate billingDate, LocalDate expectedExpirationDate) {
+        LocalDate expirationDate = expirationDateCalculator.calculateExpireDate(
+            PaymentData.builder()
+                .billingDate(billingDate)
+                .payAmount(10_000)
+                .build());
 
         assertThat(expirationDate).isEqualTo(expectedExpirationDate);
     }
