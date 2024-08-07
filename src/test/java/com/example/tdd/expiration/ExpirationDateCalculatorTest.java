@@ -111,4 +111,26 @@ class ExpirationDateCalculatorTest {
 
         assertThat(expirationDate).isEqualTo(expectedExpirationDate);
     }
+
+    @ParameterizedTest(name = "납부일이 {0}이고 100,000원 납부하면, {1} 만료일이 됨 ")
+    @CsvSource(
+        value = {
+            "2021-01-21, 2022-01-21",
+            "2021-02-28, 2022-02-28",
+            "2021-03-31, 2022-03-31",
+            "2021-01-31, 2022-01-31",
+            "2021-05-31, 2022-05-31",
+            "2020-01-31, 2021-01-31",
+        }
+    )
+    @DisplayName("10만원을 납부하면 1년 제공한다.")
+    void 십만원을_납부하면_1년_제공한다(LocalDate billingDate, LocalDate expectedExpirationDate) {
+        LocalDate expirationDate = expirationDateCalculator.calculateExpireDate(
+            PaymentData.builder()
+                .billingDate(billingDate)
+                .payAmount(100_000)
+                .build());
+
+        assertThat(expirationDate).isEqualTo(expectedExpirationDate);
+    }
 }
