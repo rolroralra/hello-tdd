@@ -444,6 +444,151 @@ assertAll(
   - 예외가 특정 클래스의 인스턴스인지 확인합니다.
 </details>
 
+## @ParameterizedTest
+[코드 예시](./src/test/java/com/example/tdd/parameterized/ParameterizedTestClassTest.java)
+
+<details>
+  <summary>펼쳐보기</summary>
+
+### 1. @ValueSource
+```java
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class ValueSourceTest {
+
+    @ParameterizedTest
+    @ValueSource(strings = {"racecar", "radar", "able was I ere I saw elba"})
+    void palindromes(String candidate) {
+        assertTrue(isPalindrome(candidate));
+    }
+
+    private boolean isPalindrome(String candidate) {
+        return candidate.equals(new StringBuilder(candidate).reverse().toString());
+    }
+}
+```
+
+### 2. @EnumSource
+```java
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+public class EnumSourceTest {
+
+    enum Topping { HAM, MUSHROOM, ONION, PEPPER, SAUSAGE }
+
+    @ParameterizedTest
+    @EnumSource(Topping.class)
+    void testEnumSource(Topping topping) {
+        assertNotNull(topping);
+    }
+}
+```
+
+### 3. @NullAndEmptySource
+```java
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class NullAndEmptySourceTest {
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void nullAndEmptyStrings(String text) {
+        assertTrue(text == null || text.isEmpty());
+    }
+}
+```
+
+### 4. @CsvSource
+```java
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CsvSourceTest {
+
+    @ParameterizedTest
+    @CsvSource({
+        "test, TEST",
+        "tEst, TEST",
+        "Java, JAVA"
+    })
+    void toUpperCase_ShouldGenerateTheExpectedUpperCaseValue(String input, String expected) {
+        assertEquals(expected, input.toUpperCase());
+    }
+}
+```
+
+### 5. @CsvFileSource
+```java
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CsvFileSourceTest {
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/test-data.csv", numLinesToSkip = 1)
+    void toUpperCase_ShouldGenerateTheExpectedUpperCaseValue(String input, String expected) {
+        assertEquals(expected, input.toUpperCase());
+    }
+}
+```
+
+### 6. @MethodSource
+```java
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.stream.Stream;
+
+public class MethodSourceTest {
+
+    @ParameterizedTest
+    @MethodSource("stringProvider")
+    void testWithStringProvider(String argument) {
+        assertNotNull(argument);
+    }
+
+    static Stream<String> stringProvider() {
+        return Stream.of("apple", "banana");
+    }
+}
+```
+
+### 7. @ArgumentsSource
+```java
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.stream.Stream;
+
+public class ArgumentsSourceTest {
+
+    @ParameterizedTest
+    @ArgumentsSource(CustomArgumentsProvider.class)
+    void testWithArgumentsSource(String argument) {
+        assertNotNull(argument);
+    }
+
+    static class CustomArgumentsProvider implements ArgumentsProvider {
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
+            return Stream.of("apple", "banana").map(Arguments::of);
+        }
+    }
+}
+```
+
+</details>
+
 # TDD
 ```mermaid
 flowchart LR
