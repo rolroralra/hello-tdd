@@ -589,6 +589,12 @@ public class ArgumentsSourceTest {
 
 </details>
 
+## Mockito
+- Stub
+- Fake
+- Spy
+- Mock
+
 # TDD
 ```mermaid
 flowchart LR
