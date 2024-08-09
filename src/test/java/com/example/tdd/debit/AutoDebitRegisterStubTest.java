@@ -5,6 +5,7 @@ import static com.example.tdd.debit.CardValidity.THEFT;
 import static com.example.tdd.debit.CardValidity.VALID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.example.tdd.debit.repository.AutoDebitInfoRepository;
 import com.example.tdd.debit.stub.StubAutoDebitInfoRepository;
 import com.example.tdd.debit.stub.StubCardNumberValidator;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,14 +14,14 @@ import org.junit.jupiter.api.Test;
 class AutoDebitRegisterStubTest {
     private AutoDebitRegister register;
     private StubCardNumberValidator stubCardNumberValidator;
-    private StubAutoDebitInfoRepository stubAutoDebitInfoRepository;
+    private AutoDebitInfoRepository autoDebitInfoRepository;
 
     @BeforeEach
     void setUp() {
         stubCardNumberValidator = new StubCardNumberValidator();
-        stubAutoDebitInfoRepository = new StubAutoDebitInfoRepository();
+        autoDebitInfoRepository = new StubAutoDebitInfoRepository();
 
-        register = new AutoDebitRegister(stubCardNumberValidator, stubAutoDebitInfoRepository);
+        register = new AutoDebitRegister(stubCardNumberValidator, autoDebitInfoRepository);
     }
 
     @Test

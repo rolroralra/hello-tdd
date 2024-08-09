@@ -10,6 +10,10 @@ public class AutoDebitInfo {
     private final LocalDateTime registTime;
     private LocalDateTime updateTime;
 
+    public AutoDebitInfo(String userId, String cardNumber) {
+        this(userId, cardNumber, LocalDateTime.now());
+    }
+
     public AutoDebitInfo(String userId, String cardNumber, LocalDateTime registTime) {
         this.userId = userId;
         this.cardNumber = cardNumber;
