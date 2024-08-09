@@ -596,3 +596,9 @@ flowchart LR
    c ---> r([리팩터링])
    r ---> t
 ```
+
+# Tip
+## Intellij Live Template 적용
+![intellij-live-templates-1](docs/intellij-live-templates-1.png)
+![docs/intellij-live-templates-2](docs/intellij-live-templates-2.png)
+![intellij-live-templates-3](docs/intellij-live-templates-3.png)
