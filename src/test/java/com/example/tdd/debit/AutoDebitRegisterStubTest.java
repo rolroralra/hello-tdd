@@ -14,14 +14,14 @@ import org.junit.jupiter.api.Test;
 class AutoDebitRegisterStubTest {
     private AutoDebitRegister register;
     private StubCardNumberValidator stubCardNumberValidator;
-    private AutoDebitInfoRepository autoDebitInfoRepository;
+    private AutoDebitInfoRepository stubAutoDebitInfoRepository;
 
     @BeforeEach
     void setUp() {
         stubCardNumberValidator = new StubCardNumberValidator();
-        autoDebitInfoRepository = new StubAutoDebitInfoRepository();
+        stubAutoDebitInfoRepository = new StubAutoDebitInfoRepository();
 
-        register = new AutoDebitRegister(stubCardNumberValidator, autoDebitInfoRepository);
+        register = new AutoDebitRegister(stubCardNumberValidator, stubAutoDebitInfoRepository);
     }
 
     @Test

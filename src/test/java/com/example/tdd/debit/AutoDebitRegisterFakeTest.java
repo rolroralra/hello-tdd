@@ -17,14 +17,14 @@ import org.junit.jupiter.api.Test;
 class AutoDebitRegisterFakeTest {
     private AutoDebitRegister register;
     private StubCardNumberValidator stubCardNumberValidator;
-    private AutoDebitInfoRepository autoDebitInfoRepository;
+    private AutoDebitInfoRepository fakeAutoDebitInfoRepository;
 
     @BeforeEach
     void setUp() {
         stubCardNumberValidator = new StubCardNumberValidator();
-        autoDebitInfoRepository = new MemoryAutoDebitInfoRepository();
+        fakeAutoDebitInfoRepository = new MemoryAutoDebitInfoRepository();
 
-        register = new AutoDebitRegister(stubCardNumberValidator, autoDebitInfoRepository);
+        register = new AutoDebitRegister(stubCardNumberValidator, fakeAutoDebitInfoRepository);
     }
 
     @Test
@@ -82,7 +82,7 @@ class AutoDebitRegisterFakeTest {
         String givenUserId = "user1";
         AutoDebitReq givenAutoDebitReq = new AutoDebitReq(givenUserId, givenValidCardNumber);
 
-        autoDebitInfoRepository.save(new AutoDebitInfo(givenUserId, givenValidCardNumber));
+        fakeAutoDebitInfoRepository.save(new AutoDebitInfo(givenUserId, givenValidCardNumber));
 
         // When
         RegisterResult result = register.register(givenAutoDebitReq);
@@ -90,7 +90,7 @@ class AutoDebitRegisterFakeTest {
         // Then
         assertAll(
             () -> assertEquals(VALID, result.getValidity()),
-            () -> assertEquals(givenValidCardNumber, autoDebitInfoRepository.findOne(givenUserId).getCardNumber())
+            () -> assertEquals(givenValidCardNumber, fakeAutoDebitInfoRepository.findOne(givenUserId).getCardNumber())
         );
     }
 
@@ -108,7 +108,7 @@ class AutoDebitRegisterFakeTest {
         assertAll(
             () -> assertEquals(VALID, result.getValidity()),
             () -> assertEquals(givenValidCardNumber,
-                autoDebitInfoRepository.findOne(givenUserId).getCardNumber())
+                fakeAutoDebitInfoRepository.findOne(givenUserId).getCardNumber())
         );
     }
 }
