@@ -11,6 +11,10 @@ public class UserRegister {
     private final UserRepository userRepository;
     private final EmailNotifier emailNotifier;
 
+    public UserRegister(WeakPasswordChecker passwordChecker) {
+        this(passwordChecker, null, null);
+    }
+
     public UserRegister(WeakPasswordChecker passwordChecker,
         UserRepository userRepository,
         EmailNotifier emailNotifier) {
