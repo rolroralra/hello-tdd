@@ -751,9 +751,103 @@ void mockThrowTest_void_method_By_Mockito_doThrow_or_doNothing() {
 </details>
 
 ### ArgumentMatchers
+- [코드 예시](./src/test/java/com/example/tdd/mockito/ArgumentMatcherTest.java)
+- `anyInt()`, `anyShort()`, `anyLong()`, `anyByte()`, `anyChar()`, `anyDouble()`, `anyFloat()`, `anyBoolean()`
+- `anyString()`
+- `any()`
+- `anyList()`, `anySet()`, `anyMap()`, `anyCollection()`
+- `eq(value)`
+
 ![ArgumentMatchers](docs/argument-matchers-method-list.png)
 
+### Verify (Then)
+- [코드 예시](./src/test/java/com/example/tdd/mockito/VerificationTest.java)
 
+![verification-mode-list.png](docs/verification-mode-list.png)
+
+
+<details>
+  <summary>(참고) `times` vs `calls`</summary>
+
+`Mockito`에서 `calls`와 `times` 메서드는 모두 메서드 호출 횟수를 검증하는 데 사용되지만, 사용하는 방식과 목적에 따라 차이가 있습니다.
+
+##### 1. `times(int wantedNumberOfInvocations)`
+- **설명**: `times`는 특정 메서드가 특정 횟수만큼 호출되었는지를 검증할 때 사용됩니다.
+- **사용 예시**:
+  ```java
+  // 예시 메서드 호출
+  mockedList.add("one");
+  mockedList.add("two");
+  mockedList.add("two");
+
+  // 검증: add("one")이 한 번 호출되었는지 확인
+  verify(mockedList, times(1)).add("one");
+
+  // 검증: add("two")가 두 번 호출되었는지 확인
+  verify(mockedList, times(2)).add("two");
+
+  // 검증: add("three")가 한 번도 호출되지 않았는지 확인
+  verify(mockedList, times(0)).add("three");
+  ```
+
+- **주요 특징**:
+  - `times`는 특정 메서드가 명시된 횟수만큼 호출되었는지를 검증하는 데 사용됩니다.
+  - 주로 호출 횟수를 엄격하게 검증하고자 할 때 사용됩니다.
+
+##### 2. `calls(int wantedNumberOfCalls)`
+- **설명**: `calls`는 주로 `InOrder`와 같이 메서드 호출 순서를 검증할 때 사용됩니다. 이 메서드는 특정 메서드가 지정된 횟수만큼 호출되었는지 검증합니다.
+- **사용 예시**:
+  ```java
+  // InOrder 객체 생성
+  InOrder inOrder = inOrder(mockedList);
+
+  // 예시 메서드 호출
+  mockedList.add("one");
+  mockedList.add("two");
+  mockedList.add("three");
+
+  // 검증: 순서대로 "one", "two", "three"가 각각 한 번씩 호출되었는지 확인
+  inOrder.verify(mockedList, calls(1)).add("one");
+  inOrder.verify(mockedList, calls(1)).add("two");
+  inOrder.verify(mockedList, calls(1)).add("three");
+  ```
+
+- **주요 특징**:
+  - `calls`는 `InOrder`와 함께 사용되어, 메서드 호출의 순서를 검증하면서 호출 횟수도 동시에 검증할 수 있습니다.
+  - 순서를 중시하는 테스트에서 유용하게 사용됩니다.
+  - `times`와 달리, 주로 `InOrder.verify()`와 함께 사용됩니다.
+
+##### 요약
+- **`times`**: 특정 메서드가 지정된 횟수만큼 호출되었는지 검증하는 데 사용됩니다. 일반적인 호출 횟수 검증에 사용됩니다.
+- **`calls`**: 메서드 호출 순서와 호출 횟수를 동시에 검증할 때, 특히 `InOrder`와 함께 사용됩니다.
+
+</details>
+
+### ArgumentCaptor
+- [코드 예시](./src/test/java/com/example/tdd/mockito/ArgumentCaptorTest.java)
+- `ArgumentCaptor.capture()` 혹은 `ArgumentCaptor.forClass(String.class)`를 사용하여 메서드 호출 시 전달된 인자를 캡처할 수 있습니다.
+  - **verify 코드에서 인자로 전달** 
+
+![argument-captor.png](docs/argument-captor.png)
+
+### mockito-junit-jupiter (MockitoExtension)
+- `org.mockito:mockito-junit-jupiter:5.12.0` 라이브러리 적용
+- `@ExtendWith(MockitoExtension.class)`, `@Mock` 어노테이션으로 자동으로 모의 객체 생성
+
+```java
+@ExtendWith(MockitoExtension.class)
+class MockitoExtensionTest {
+
+    @Mock
+    private List<String> mockedList;
+
+    @Test
+    void test() {
+        mockedList.add("one");
+        verify(mockedList).add("one");
+    }
+}
+```
 
 # TDD
 ```mermaid
