@@ -602,6 +602,159 @@ public class ArgumentsSourceTest {
   - Stub + Spy
   - 기대한 대로 상호작용하는지 행위를 검증한다.
 
+### Mockito 사용법
+> `spring-boot-starter-test` 에 기본적으로 포함되어 있습니다.
+> 
+> [Mockito Javadoc](https://javadoc.io/static/org.mockito/mockito-core/5.12.0/org/mockito/Mockito.html)
+>
+> [Mockito 코드 예시](https://github.com/mockito/mockito/wiki#examples)
+
+- maven
+  ```xml
+  <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+  <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>5.12.0</version>
+      <scope>test</scope>
+  </dependency>
+  ```
+- gradle (groovy)
+  ```groovy
+  dependencies {
+      // https://mvnrepository.com/artifact/org.mockito/mockito-core
+      testImplementation 'org.mockito:mockito-core:5.12.0'
+  }
+  ```
+- gradle (kotlin)
+  ```kotlin
+  dependencies { 
+      // https://mvnrepository.com/artifact/org.mockito/mockito-core
+      testImplementation("org.mockito:mockito-core:5.12.0")
+  }
+  ```
+
+#### 1. `Function<T, R>`을 정상 리턴 값을 mocking 하기
+
+<details>
+  <summary>펼쳐보기</summary>
+  
+```java
+@Test
+void mockTest_By_BDDMockito_given_method() {
+    given(gameNumGenMock.generate(GameLevel.EASY)).willReturn("123");
+
+    String gameNumber = gameNumGenMock.generate(GameLevel.EASY);
+
+    assertThat(gameNumber).isEqualTo("123");
+}
+
+@Test
+void mockTest_By_Mockito_when_method() {
+    when(gameNumGenMock.generate(eq(GameLevel.EASY))).thenReturn("123");
+
+    String gameNumber = gameNumGenMock.generate(GameLevel.EASY);
+
+    assertThat(gameNumber).isEqualTo("123");
+}
+```
+
+</details>
+
+#### 2. `Function<T, R>`을 예외 throwing을 mocking 하기
+
+<details>
+  <summary>펼쳐보기</summary>
+
+```java
+@Test
+void mockThrowTest_By_BDDMockito_given_method() {
+  GameNumGen gameNumGenMock = mock(GameNumGen.class);
+
+  given(gameNumGenMock.generate(GameLevel.EASY)).willThrow(IllegalArgumentException.class);
+  assertThatExceptionOfType(IllegalArgumentException.class)
+          .isThrownBy(() -> gameNumGenMock.generate(GameLevel.EASY));
+}
+
+@Test
+void mockThrowTest_By_Mockito_when_method() {
+  GameNumGen gameNumGenMock = mock(GameNumGen.class);
+
+  when(gameNumGenMock.generate(eq(GameLevel.EASY))).thenThrow(IllegalArgumentException.class);
+
+  assertThatExceptionOfType(IllegalArgumentException.class)
+          .isThrownBy(() -> gameNumGenMock.generate(GameLevel.EASY));
+}
+```
+
+</details>
+
+#### 3. `Function<T, Void>`을 정상 작동 mocking 하기
+참고: [Mocking Void Methods with Mockito](https://www.baeldung.com/mockito-void-methods)
+
+<details>
+  <summary>펼쳐보기</summary>
+
+```java
+@Test
+void mockNothing_Test_void_method_By_BDDMockito() {
+    List<String> mockList = mock(List.class);
+
+    willDoNothing().given(mockList).clear();
+
+    assertThatNoException().isThrownBy(mockList::clear);
+}
+
+@Test
+void mockNothing_Test_void_method_By_Mockito_doThrow_or_doNothing() {
+    List<String> mockList = mock(List.class);
+
+    doNothing().when(mockList).clear();
+
+    assertThatNoException().isThrownBy(mockList::clear);
+}
+```
+
+</details>
+
+#### 4. `Function<T, Void>`을 예외 throwing을 mocking 하기
+
+<details>
+  <summary>펼쳐보기</summary>
+
+```java
+@Test
+void mockThrowTest_void_method_By_BDDMockito() {
+    List<String> mockList = mock(List.class);
+
+    willThrow(UnsupportedOperationException.class)
+        .given(mockList)
+        .clear();
+
+    assertThatExceptionOfType(UnsupportedOperationException.class)
+        .isThrownBy(mockList::clear);
+}
+
+@Test
+void mockThrowTest_void_method_By_Mockito_doThrow_or_doNothing() {
+    List<String> mockList = mock(List.class);
+
+    doThrow(UnsupportedOperationException.class)
+        .when(mockList)
+        .clear();
+
+    assertThatExceptionOfType(UnsupportedOperationException.class)
+        .isThrownBy(mockList::clear);
+}
+```
+
+</details>
+
+### ArgumentMatchers
+![ArgumentMatchers](docs/argument-matchers-method-list.png)
+
+
+
 # TDD
 ```mermaid
 flowchart LR
