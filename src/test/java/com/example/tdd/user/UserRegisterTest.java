@@ -2,6 +2,7 @@ package com.example.tdd.user;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.example.tdd.user.email.SpyEmailNotifier;
 import com.example.tdd.user.exception.DuplicationIdException;
 import com.example.tdd.user.exception.WeakPasswordException;
 import com.example.tdd.user.password.StubWeakPasswordChecker;
@@ -18,10 +19,11 @@ class UserRegisterTest {
     private UserRegister userRegister;
     private final StubWeakPasswordChecker stubWeakPasswordChecker = new StubWeakPasswordChecker();
     private final UserRepository fakeUserRepository = new MemoryUserRepository();
+    private final SpyEmailNotifier spyEmailNotifier = new SpyEmailNotifier();
 
     @BeforeEach
     void setUp() {
-        userRegister = new UserRegister(stubWeakPasswordChecker, fakeUserRepository);
+        userRegister = new UserRegister(stubWeakPasswordChecker, fakeUserRepository, spyEmailNotifier);
     }
 
     @ParameterizedTest(name = "id={0}, password={1}, email={2}")
@@ -73,6 +75,17 @@ class UserRegisterTest {
             .hasFieldOrPropertyWithValue("id", id)
             .hasFieldOrPropertyWithValue("password", password)
             .hasFieldOrPropertyWithValue("email", email);
+    }
+
+    @ParameterizedTest(name = "id={0}, password={1}, email={2}")
+    @CsvSource({"id, password, email"})
+    @DisplayName("가입 성공하면, 메일을 전송함")
+    void whenRegisterThenSendEmail(String id, String password, String email) {
+        // When
+        userRegister.register(id, password, email);
+
+        // Then
+        assertThat(spyEmailNotifier.getReceivedEmails()).containsExactly(email);
     }
 
 }
