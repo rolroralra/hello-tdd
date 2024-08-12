@@ -46,8 +46,13 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+tasks.withType<JavaExec> {
+    jvmArgs("-XX:+EnableDynamicAgentLoading", "-Xshare:off")
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
+    jvmArgs("-XX:+EnableDynamicAgentLoading", "-Xshare:off")
 }
 
 tasks.test {
