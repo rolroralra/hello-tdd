@@ -465,7 +465,7 @@ public class ValueSourceTest {
     }
 
     private boolean isPalindrome(String candidate) {
-        return candidate.equals(new StringBuilder(candidate).reverse().toString());
+        return candidate.contentEquals(new StringBuilder(candidate).reverse());
     }
 }
 ```
@@ -591,9 +591,16 @@ public class ArgumentsSourceTest {
 
 ## Mockito
 - Stub
+  - 구현을 테스트에 맞게 단순하게 대체하는 것
 - Fake
+  - 실제 동작하는 구현을 제공
+  - 제품에는 적합하지 않음
+    - ex) DB 대신에 메모리를 통한 구현
 - Spy
+  - 호출된 내역을 기록한다.
 - Mock
+  - Stub + Spy
+  - 기대한 대로 상호작용하는지 행위를 검증한다.
 
 # TDD
 ```mermaid
