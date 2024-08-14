@@ -589,17 +589,17 @@ public class ArgumentsSourceTest {
 
 </details>
 
-## Mockito
-- Stub
+## Mockito (Test Double)
+- `Stub`
   - 구현을 테스트에 맞게 단순하게 대체하는 것
-- Fake
+- `Fake`
   - 실제 동작하는 구현을 제공
   - 제품에는 적합하지 않음
     - ex) DB 대신에 메모리를 통한 구현
-- Spy
+- `Spy`
   - 호출된 내역을 기록한다.
-- Mock
-  - Stub + Spy
+- `Mock`
+  - `Stub` + `Spy`
   - 기대한 대로 상호작용하는지 행위를 검증한다.
 
 ### Mockito 사용법
@@ -848,6 +848,29 @@ class MockitoExtensionTest {
     }
 }
 ```
+
+# 단위 테스트, 통합 테스트, E2E 테스트
+
+- **E2E 테스트(End-to-End Test)**, **인수 테스트(Acceptance Test)**
+  - 사용자 입장에서 시스템이 제공하는 기능이 올바르게 동작하는지 확인
+  - 사용자가 직접 사용하는 웹 브라우저나 모바일 App을 통해 테스트
+    - 주로 QA(Quality Assurance)팀이 수행
+- **통합 테스트(Integration Test)**
+  - 시스템의 각 구성 요소가 올바르게 연동되는지 확인
+    - DB, Message Queue, REST API, 외부 서비스
+  - E2E 테스트와 달리, 소프트웨어 코드를 직접 테스트
+- **단위 테스트(Unit Test)**
+  - 개별 코드나 컴포넌트가 계획한대로 동작하는지 확인
+  - 클래스나 메서드 단위로 테스트
+  - 일부 의존 대상은 Mocking을 통해 대체
+
+![test-types.png](docs/test-types.png)
+
+## 테스트 피라미드(Test Pyramid)
+- 가능하면 단위 테스트에서 다양한 상황을 다루고, (예외 상황 포함) 
+- 통합 테스트, E2E 테스트는 주요 핵심 기능 상황에 초점을 맞추는 것이 좋습니다.
+
+![test-pyramid.png](docs/test-pyramid.png)
 
 # TDD
 ```mermaid

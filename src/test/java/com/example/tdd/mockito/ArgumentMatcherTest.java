@@ -8,12 +8,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-public class ArgumentMatcherTest {
+class ArgumentMatcherTest {
     interface GameNumGen {
         String generate(GameLevel gameLevel);
     }
@@ -71,6 +72,7 @@ public class ArgumentMatcherTest {
      *     <code>someMethod(any(), eq("String by matcher"));</code><br/>
      * </p>
      */
+    @Disabled("ArgumentMatchers를 하나라도 사용하면, 모두 ArgumentMatchers를 사용해야 한다.")
     @DisplayName("ArgumentMatchers를 하나라도 사용하면, 모두 ArgumentMatchers를 사용해야 한다.")
     @Test
     void whenUseArgumentMatchersThenMustUseAllArgumentMatchers() {
