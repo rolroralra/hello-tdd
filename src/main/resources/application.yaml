@@ -11,3 +11,7 @@ spring:
     url: jdbc:h2:mem:testdb
     username: sa
     password:
+
+integration:
+  url: http://127.0.0.1:9090
+  timeout: 5s
