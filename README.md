@@ -880,7 +880,7 @@ flowchart LR
    r ---> t
 ```
 
-## 팁
+## 테스트 코드 Tip
 ### 변수나 필드를 사용해서 기댓값 표현하지 않기
 
 ### 두 개 이상 검증하지 않기
@@ -927,18 +927,42 @@ flowchart LR
 - `if` 문을 사용해서 검증을 하지 않는다.
 - 해당 조건 자체도 검증해야 한다.
 
+## Intellij Tip
+- `Cmd(Ctrl) + Shift + T`: 테스트 클래스 생성
+- `@Tag` 활용
+  - [참고 코드](./src/test/java/com/example/tdd/tag/TagAnnotationTest.java)
+  - [gradle task 등록](./build.gradle.kts)
+    ```kotlin
+    tasks.register<Test>("unitTest") {
+      description = "Run unit tests"
+      group = "verification"
+
+      useJUnitPlatform {
+        includeTags("unitTest")
+      }
+    }
+    ```
+    ![intellij_gradle_task_register.png](docs/intellij_gradle_task_register.png)    
+
+  - Intellij에서 `unitTest` task 실행
+    ![intellij_tag_test.png](docs/intellij_tag_test.png)
+- live template 활용
+  - SWDC 컨플루언스 페이지 참조
 
 # ATDD
 - TBD
 
 # TestContainer
-- TBD
+- [TestContainer](https://www.testcontainers.org/)
+- [Test-Container-Example](https://github.com/rolroralra/test-container-tutorial)
+
 
 # WireMock
-- TBD
+- [WireMock](http://wiremock.org/)
+- [WireMock-Example](https://github.com/rolroralra/hello-wiremock)
 
 # Tilt
-- ...
+- [Tilt](https://tilt.dev/)
 
 
 # 참고 서적

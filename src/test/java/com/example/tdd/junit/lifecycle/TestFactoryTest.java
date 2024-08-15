@@ -3,6 +3,7 @@ package com.example.tdd.junit.lifecycle;
 import static com.example.tdd.strings.PalindromeValidator.isPalindrome;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
@@ -25,12 +26,12 @@ import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.function.ThrowingConsumer;
 
-public class TestFactoryTest {
+class TestFactoryTest {
 
     private final Calculator calculator = new Calculator();
 
     // This will result in a JUnitException!
-    @Disabled
+    @Disabled("This test will fail with a JUnitException!")
     @TestFactory
     List<String> dynamicTestsWithInvalidReturnType() {
         return List.of("Hello");
@@ -43,8 +44,6 @@ public class TestFactoryTest {
             dynamicTest("2nd dynamic test", () -> assertEquals(4, calculator.multiply(2, 2)))
         );
     }
-
-
 
     @TestFactory
     Iterable<DynamicTest> dynamicTestsFromIterable() {
@@ -106,10 +105,10 @@ public class TestFactoryTest {
         };
 
         // Generates display names like: input:5, input:37, input:85, etc.
-        Function<Integer, String> displayNameGenerator = (input) -> "input:" + input;
+        Function<Integer, String> displayNameGenerator = input -> "input:" + input;
 
         // Executes tests based on the current input value.
-        ThrowingConsumer<Integer> testExecutor = (input) -> assertTrue(input % 7 != 0);
+        ThrowingConsumer<Integer> testExecutor = input -> assertNotEquals(0, input % 7);
 
         // Returns a stream of dynamic tests.
         return DynamicTest.stream(inputGenerator, displayNameGenerator, testExecutor);

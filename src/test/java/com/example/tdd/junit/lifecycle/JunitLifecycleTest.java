@@ -1,41 +1,69 @@
 package com.example.tdd.junit.lifecycle;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class JunitLifecycleTest {
+class JunitLifecycleTest {
   @BeforeAll
   static void beforeAll() {
-    System.out.println("Before all");
+    System.out.println("Before all outer test");
   }
 
   @AfterAll
   static void afterAll() {
-    System.out.println("After all");
+    System.out.println("After all outer test");
   }
+
+  @Nested
+    class InnerTest {
+        @BeforeAll
+        static void beforeAll() {
+          System.out.println("Before all inner test");
+        }
+
+        @AfterAll
+        static void afterAll() {
+          System.out.println("After all inner test");
+        }
+
+        @BeforeEach
+        void setUp() {
+          System.out.println("Before each inner test");
+        }
+
+        @AfterEach
+        void tearDown() {
+          System.out.println("After each inner test");
+        }
+
+        @Test
+        void innerTest1() {
+          System.out.println("Inner Test 1");
+        }
+
+        @Test
+        void innerTest2() {
+          System.out.println("Inner Test 2");
+        }
+    }
 
   @BeforeEach
   void setUp() {
-    System.out.println("Before each");
+    System.out.println("Before each outer test");
   }
 
   @AfterEach
   void tearDown() {
-    System.out.println("After each");
+    System.out.println("After each outer test");
   }
 
   @Test
-  void test1() {
-    System.out.println("Test 1");
+  void outerTest1() {
+    System.out.println("Outer Test 1");
   }
 
   @Test
-  void test2() {
-    System.out.println("Test 2");
+  void outerTest2() {
+    System.out.println("Outer Test 2");
   }
 }
