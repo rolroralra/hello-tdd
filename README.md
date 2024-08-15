@@ -950,20 +950,37 @@ flowchart LR
   - SWDC 컨플루언스 페이지 참조
 
 # ATDD
-- TBD
+![ATDD.png](docs/ATDD.png)
+![ATDD2.png](docs/ATDD2.png)
 
-# TestContainer
+# 최근 추가된 테스트 관련 라이브러리
+## TestContainer
+> TestContainers는 통합 테스트를 위해 Docker 컨테이너를 손쉽게 사용할 수 있도록 지원하는 Java 라이브러리입니다. <br/>
+> 이 라이브러리를 사용하면, 테스트 환경에서 실제 데이터베이스, 메시지 브로커, 웹 서버 등 다양한 Docker 컨테이너를 시작하고 관리할 수 있습니다. <br/> 
+> TestContainers는 개발자와 테스트 엔지니어가 보다 현실적인 테스트 환경을 구축할 수 있도록 도와줍니다.
+
 - [TestContainer](https://www.testcontainers.org/)
 - [Test-Container-Example](https://github.com/rolroralra/test-container-tutorial)
+- [SpringBoot Docs - TestContainer](https://docs.spring.io/spring-boot/reference/testing/testcontainers.html)
 
+## WireMock
+> WireMock은 Java 기반의 API 모킹(Mock) 도구로, HTTP(S) 기반의 API를 모방하여 테스트 환경에서 실제 서버와의 통신 없이도 API 호출을 테스트할 수 있게 해줍니다. <br/>
+> 이를 통해 개발자나 테스트 엔지니어는 외부 서비스와의 통신을 모의(Mock)하여 애플리케이션의 동작을 검증할 수 있습니다.
 
-# WireMock
 - [WireMock](http://wiremock.org/)
 - [WireMock-Example](https://github.com/rolroralra/hello-wiremock)
 
-# Tilt
+## Tilt
+> Tilt는 개발자가 쿠버네티스(Kubernetes) 클러스터에서 애플리케이션을 빠르고 효율적으로 개발, 테스트, 배포할 수 있도록 도와주는 도구입니다.<br/>
+> <br/> 
+> Tilt는 로컬 개발 환경에서 쿠버네티스를 쉽게 사용할 수 있게 하며, <br/>
+> 컨테이너 빌드, 로깅, 코드 변경 모니터링 등을 자동화하여 <br/>
+> 개발자가 애플리케이션을 반복적으로 빌드하고 배포하는 과정을 단순화합니다.
+
 - [Tilt](https://tilt.dev/)
 
+## SpringBoot Docker-Compose Support
+- [SpringBoot Docker-Compose Support](https://spring.io/blog/2021/10/07/spring-boot-docker-compose-support)
 
 # 참고 서적
 - [테스트 주도 개발 시작하기](https://product.kyobobook.co.kr/detail/S000001248962)
