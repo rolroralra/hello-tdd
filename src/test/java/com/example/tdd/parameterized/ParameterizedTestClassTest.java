@@ -1,5 +1,6 @@
 package com.example.tdd.parameterized;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -55,7 +56,7 @@ public class ParameterizedTestClassTest {
         @ParameterizedTest(name = "\"{0}\" is null or empty")
         @NullAndEmptySource
         void nullAndEmptyStrings(String text) {
-            assertTrue(text == null || text.isEmpty());
+            assertThat(text).isNullOrEmpty();
         }
     }
 

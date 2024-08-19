@@ -16,7 +16,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class MockitoTest {
+class MockitoTest {
     interface GameNumGen {
         String generate(GameLevel gameLevel);
     }
@@ -53,8 +53,6 @@ public class MockitoTest {
 
     @Test
     void mockThrowTest_By_BDDMockito_given_method() {
-        GameNumGen gameNumGenMock = mock(GameNumGen.class);
-
         given(gameNumGenMock.generate(GameLevel.EASY)).willThrow(IllegalArgumentException.class);
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> gameNumGenMock.generate(GameLevel.EASY));
@@ -62,8 +60,6 @@ public class MockitoTest {
 
     @Test
     void mockThrowTest_By_Mockito_when_method() {
-        GameNumGen gameNumGenMock = mock(GameNumGen.class);
-
         when(gameNumGenMock.generate(eq(GameLevel.EASY))).thenThrow(IllegalArgumentException.class);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
