@@ -2,6 +2,7 @@ val apacheCommonsLang3Version: String by project
 val guavaVersion: String by project
 val wiremockVersion: String by project
 val wiremockSpringBootVersion: String by project
+val okHttpVersion: String by project
 
 plugins {
     java
@@ -70,6 +71,9 @@ dependencies {
     testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
 
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+
+    testImplementation("com.squareup.okhttp3:mockwebserver:$okHttpVersion")
+    testImplementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
