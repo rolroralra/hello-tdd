@@ -1,4 +1,4 @@
-package com.example.tdd.api;
+package com.example.tdd.api.acceptance;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;

@@ -1,4 +1,4 @@
-package com.example.tdd.api;
+package com.example.tdd.api.server.mock;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;

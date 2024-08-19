@@ -1,4 +1,4 @@
-package com.example.tdd.api;
+package com.example.tdd.api.acceptance;
 
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.modifyHeaders;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
@@ -78,5 +78,5 @@ public abstract class AbstractRestAssuredTest {
         return identifier() + "/{method-name}";
     }
 
-    abstract protected String identifier();
+    protected abstract String identifier();
 }

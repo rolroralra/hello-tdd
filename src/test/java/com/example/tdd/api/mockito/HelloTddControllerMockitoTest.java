@@ -1,14 +1,7 @@
-package com.example.tdd.api;
+package com.example.tdd.api.mockito;
 
-import com.github.tomakehurst.wiremock.client.WireMock;
-import com.github.tomakehurst.wiremock.junit5.WireMockTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -16,12 +9,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WireMockTest(httpPort = 9090)
-class HelloTddControllerMockMvcTest extends AbstractMockMvcTest {
+import com.example.tdd.api.acceptance.AbstractMockMvcTest;
+import com.example.tdd.client.IntegrationClient;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+
+class HelloTddControllerMockitoTest extends AbstractMockMvcTest {
 
     @Override
     protected String identifier() {
         return "mock-mvc";
+    }
+
+    @Autowired
+    IntegrationClient integrationClient;
+
+    @TestConfiguration
+    static class TestIntegrationConfiguration {
+        @Primary
+        @Bean
+        IntegrationClient integrationClient() {
+            return mock(IntegrationClient.class);
+        }
     }
 
     @ParameterizedTest(name = "GET /api/v1/hello?name={0} --> Hello, {0}!")
@@ -43,10 +58,7 @@ class HelloTddControllerMockMvcTest extends AbstractMockMvcTest {
     @DisplayName("GET /api/v1/integration?name={name} 정상 작동 테스트")
     void testIntegrationApi(String givenName, String givenIntegrationApiResponse) throws Exception {
         // Given
-        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/data"))
-            .willReturn(WireMock.aResponse()
-                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
-                .withBody(givenIntegrationApiResponse)));
+        when(integrationClient.callIntegration(givenName)).thenReturn(givenIntegrationApiResponse);
 
         perform(
             get("/api/v1/integration?name={name}", givenName),
