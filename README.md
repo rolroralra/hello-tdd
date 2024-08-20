@@ -962,6 +962,12 @@ flowchart LR
 - [Test-Container-Example](https://github.com/rolroralra/test-container-tutorial)
 - [SpringBoot Docs - TestContainer](https://docs.spring.io/spring-boot/reference/testing/testcontainers.html)
 
+## MockRestServiceServer
+- [MockRestServiceServer](https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#spring-mvc-test-client)
+
+## MockWebServer (okhttp)
+- [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver)
+
 ## WireMock
 > WireMock은 Java 기반의 API 모킹(Mock) 도구로, HTTP(S) 기반의 API를 모방하여 테스트 환경에서 실제 서버와의 통신 없이도 API 호출을 테스트할 수 있게 해줍니다. <br/>
 > 이를 통해 개발자나 테스트 엔지니어는 외부 서비스와의 통신을 모의(Mock)하여 애플리케이션의 동작을 검증할 수 있습니다.
