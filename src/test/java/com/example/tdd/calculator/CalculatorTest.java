@@ -30,10 +30,37 @@ class CalculatorTest {
 
         assertAll(
             () -> Assertions.assertEquals(4, calculator.add(2, 2)),
-            () -> Assertions.assertEquals(0, calculator.subtract(2, 2)),
+            () -> Assertions.assertEquals(0+1, calculator.subtract(2, 2)),
             () -> Assertions.assertEquals(4, calculator.multiply(2, 2)),
-            () -> Assertions.assertEquals(1, calculator.divide(2, 2))
+            () -> Assertions.assertEquals(1+1, calculator.divide(2, 2))
         );
+    }
+
+    @DisplayName("assertAll()을 사용하면, 실패 여부와 상관없이 모든 테스트를 실행할 수 있다.")
+    @Test
+    void testAssertAll() {
+        Calculator calculator = new Calculator();
+
+        assertAll(
+            () -> Assertions.assertEquals(4, calculator.add(2, 2)),
+            () -> Assertions.assertEquals(0+1, calculator.subtract(2, 2)),
+            () -> Assertions.assertEquals(4, calculator.multiply(2, 2)),
+            () -> Assertions.assertEquals(1+1, calculator.divide(2, 2))
+        );
+    }
+
+    @DisplayName("assertAll()을 사용하지 않으면, 실패한 테스트 이후에는 실행되지 않는다.")
+    @Test
+    void testAssertAllWithout() {
+        assertThatExceptionOfType(ArithmeticException.class)
+            .isThrownBy(() -> Calculator.plus(Integer.MAX_VALUE, 1));
+
+        Calculator calculator = new Calculator();
+
+        Assertions.assertEquals(4, calculator.add(2, 2));
+        Assertions.assertEquals(0+1, calculator.subtract(2, 2));
+        Assertions.assertEquals(4, calculator.multiply(2, 2));
+        Assertions.assertEquals(1+1, calculator.divide(2, 2));
     }
 
 }
