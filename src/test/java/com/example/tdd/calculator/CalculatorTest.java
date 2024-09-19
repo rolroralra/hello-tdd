@@ -34,9 +34,9 @@ class CalculatorTest {
 
         assertAll(
             () -> Assertions.assertEquals(4, calculator.add(2, 2)),
-            () -> Assertions.assertEquals(0+1, calculator.subtract(2, 2)),
+            () -> Assertions.assertEquals(0, calculator.subtract(2, 2)),
             () -> Assertions.assertEquals(4, calculator.multiply(2, 2)),
-            () -> Assertions.assertEquals(1+1, calculator.divide(2, 2))
+            () -> Assertions.assertEquals(1, calculator.divide(2, 2))
         );
     }
 
@@ -49,9 +49,9 @@ class CalculatorTest {
         Calculator calculator = new Calculator();
 
         Assertions.assertEquals(4, calculator.add(2, 2));
-        Assertions.assertEquals(0+1, calculator.subtract(2, 2));
+        Assertions.assertEquals(0, calculator.subtract(2, 2));
         Assertions.assertEquals(4, calculator.multiply(2, 2));
-        Assertions.assertEquals(1+1, calculator.divide(2, 2));
+        Assertions.assertEquals(1, calculator.divide(2, 2));
     }
 
 }
