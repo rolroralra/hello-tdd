@@ -25,15 +25,6 @@ class CalculatorTest {
     void plusWhenOverflowThenThrowException() {
         assertThatExceptionOfType(ArithmeticException.class)
                 .isThrownBy(() -> Calculator.plus(Integer.MAX_VALUE, 1));
-
-        Calculator calculator = new Calculator();
-
-        assertAll(
-            () -> Assertions.assertEquals(4, calculator.add(2, 2)),
-            () -> Assertions.assertEquals(0+1, calculator.subtract(2, 2)),
-            () -> Assertions.assertEquals(4, calculator.multiply(2, 2)),
-            () -> Assertions.assertEquals(1+1, calculator.divide(2, 2))
-        );
     }
 
     @DisplayName("assertAll()을 사용하면, 실패 여부와 상관없이 모든 테스트를 실행할 수 있다.")
