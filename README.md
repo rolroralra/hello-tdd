@@ -848,6 +848,9 @@ class MockitoExtensionTest {
 }
 ```
 
+# 테스트 성능 개선하기
+[@DirtiesContext 걷어내기](https://tecoble.techcourse.co.kr/post/2022-10-15-test-code-optimization/)
+
 # 단위 테스트, 통합 테스트, E2E 테스트
 
 - **E2E 테스트(End-to-End Test)**, **인수 테스트(Acceptance Test)**
