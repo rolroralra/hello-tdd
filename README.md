@@ -747,6 +747,9 @@ void mockThrowTest_void_method_By_Mockito_doThrow_or_doNothing() {
 }
 ```
 
+### 5. Mocking Static Methods
+[Mocking Static Methods With Mockito](https://www.baeldung.com/mockito-mock-static-methods)
+
 </details>
 
 ### ArgumentMatchers
