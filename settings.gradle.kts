@@ -1,1 +1,1 @@
-rootProject.name = "tdd-practice"
+rootProject.name = "hello-tdd"
