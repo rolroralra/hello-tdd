@@ -634,10 +634,6 @@ public class ArgumentsSourceTest {
   ```
 
 #### 1. `Function<T, R>`을 정상 리턴 값을 mocking 하기
-
-<details>
-  <summary>펼쳐보기</summary>
-  
 ```java
 @Test
 void mockTest_By_BDDMockito_given_method() {
@@ -658,12 +654,7 @@ void mockTest_By_Mockito_when_method() {
 }
 ```
 
-</details>
-
 #### 2. `Function<T, R>`을 예외 throwing을 mocking 하기
-
-<details>
-  <summary>펼쳐보기</summary>
 
 ```java
 @Test
@@ -686,13 +677,8 @@ void mockThrowTest_By_Mockito_when_method() {
 }
 ```
 
-</details>
-
 #### 3. `Function<T, Void>`을 정상 작동 mocking 하기
-참고: [Mocking Void Methods with Mockito](https://www.baeldung.com/mockito-void-methods)
-
-<details>
-  <summary>펼쳐보기</summary>
+- 참고: [Mocking Void Methods with Mockito](https://www.baeldung.com/mockito-void-methods)
 
 ```java
 @Test
@@ -714,12 +700,7 @@ void mockNothing_Test_void_method_By_Mockito_doThrow_or_doNothing() {
 }
 ```
 
-</details>
-
 #### 4. `Function<T, Void>`을 예외 throwing을 mocking 하기
-
-<details>
-  <summary>펼쳐보기</summary>
 
 ```java
 @Test
@@ -748,9 +729,8 @@ void mockThrowTest_void_method_By_Mockito_doThrow_or_doNothing() {
 ```
 
 ### 5. Mocking Static Methods
-[Mocking Static Methods With Mockito](https://www.baeldung.com/mockito-mock-static-methods)
+- 참고: [Mocking Static Methods With Mockito](https://www.baeldung.com/mockito-mock-static-methods)
 
-</details>
 
 ### ArgumentMatchers
 - [코드 예시](./src/test/java/com/example/tdd/mockito/ArgumentMatcherTest.java)
