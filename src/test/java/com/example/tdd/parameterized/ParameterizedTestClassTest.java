@@ -20,6 +20,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+/**
+ * @see <a href=https://www.baeldung.com/parameterized-tests-junit-5>Guide to JUnit 5 Parameterized Tests (baeldung)</a>
+ *
+ */
 public class ParameterizedTestClassTest {
 
     @DisplayName("@ValueSource 테스트")

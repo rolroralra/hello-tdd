@@ -53,5 +53,4 @@ class CalculatorTest {
         Assertions.assertEquals(4, calculator.multiply(2, 2));
         Assertions.assertEquals(1, calculator.divide(2, 2));
     }
-
 }
