@@ -976,6 +976,9 @@ flowchart LR
 ## Awaitility
 - [Awaitility](http://www.awaitility.org/)  
 
+# Reference Link
+- [tdd-lotto](https://github.com/rolroralra/hello-tdd-lotto)
+
 # 참고 서적
 - [테스트 주도 개발 시작하기](https://product.kyobobook.co.kr/detail/S000001248962)
 - [테스트 주도 개발 - 켄트 백](https://product.kyobobook.co.kr/detail/S000001032985)
