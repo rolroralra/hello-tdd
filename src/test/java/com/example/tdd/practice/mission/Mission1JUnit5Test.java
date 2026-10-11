@@ -1,4 +1,4 @@
-package com.example.tdd.practice;
+package com.example.tdd.practice.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

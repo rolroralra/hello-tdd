@@ -1,31 +1,19 @@
-package com.example.tdd.practice;
+package com.example.tdd.practice.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import com.example.tdd.user.User;
 import com.example.tdd.user.UserRegister;
 import com.example.tdd.user.email.EmailNotifier;
-import com.example.tdd.user.exception.DuplicationIdException;
-import com.example.tdd.user.exception.WeakPasswordException;
 import com.example.tdd.user.password.WeakPasswordChecker;
 import com.example.tdd.user.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  * [미션 3] Mockito
