@@ -5,11 +5,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.abort;
 
 import com.example.tdd.calculator.Calculator;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -20,11 +19,9 @@ import org.junit.jupiter.api.Test;
  * 대상 클래스: {@link Calculator}
  *
  * 진행 방법
- * 1. 아래 @Disabled 를 지운다.
- * 2. 각 테스트의 fail(...) 을 지우고 TODO 를 채운다.
- * 3. 테스트를 실행해서 초록불을 확인한다.
+ * 1. 각 테스트의 abort(...) 을 지우고 TODO 를 채운다.
+ * 2. 테스트를 실행해서 초록불을 확인한다.
  */
-@Disabled("미션을 시작하려면 이 줄을 지우세요")
 @DisplayName("[미션 1] JUnit5 기본")
 class Mission1JUnit5Test {
 
@@ -41,7 +38,7 @@ class Mission1JUnit5Test {
     void add() {
         // TODO: calculator.add(2, 3) 결과가 5 인지 검증하세요.
         // 힌트: assertEquals(expected, actual)  또는  assertThat(actual).isEqualTo(expected)
-        fail("미션 1-1 을 완성하세요");
+        abort("미션 1-1 을 완성하세요");
     }
 
     @Test
@@ -51,7 +48,7 @@ class Mission1JUnit5Test {
         //       (12, 8, 20, 5)
         // 힌트: assertAll(() -> assertEquals(...), () -> assertEquals(...), ...)
         //       assertAll 은 중간에 실패해도 나머지 검증을 모두 실행합니다.
-        fail("미션 1-2 를 완성하세요");
+        abort("미션 1-2 를 완성하세요");
     }
 
     @Test
@@ -60,7 +57,7 @@ class Mission1JUnit5Test {
         // TODO: calculator.divide(10, 0) 호출 시 ArithmeticException 이 발생하는지 검증하세요.
         // 힌트: assertThrows(ArithmeticException.class, () -> ...)
         //       또는 assertThatThrownBy(() -> ...).isInstanceOf(ArithmeticException.class)
-        fail("미션 1-3 을 완성하세요");
+        abort("미션 1-3 을 완성하세요");
     }
 
     @Nested
@@ -73,7 +70,7 @@ class Mission1JUnit5Test {
             // TODO: Calculator.plus(Integer.MAX_VALUE, 1) 이 ArithmeticException 을 던지는지 검증하세요.
             // 힌트: plus() 는 내부에서 BigInteger.intValueExact() 를 사용합니다.
             //       @Nested 클래스로 관련 테스트를 그룹핑할 수 있습니다.
-            fail("미션 1-4 를 완성하세요");
+            abort("미션 1-4 를 완성하세요");
         }
     }
 }

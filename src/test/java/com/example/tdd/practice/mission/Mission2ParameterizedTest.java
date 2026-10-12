@@ -1,15 +1,15 @@
 package com.example.tdd.practice.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.abort;
 
 import com.example.tdd.calculator.Calculator;
 import com.example.tdd.password.PasswordStrength;
 import com.example.tdd.password.PasswordStrengthMeter;
 import com.example.tdd.strings.PalindromeValidator;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.Arguments;
 
 /**
@@ -18,12 +18,10 @@ import org.junit.jupiter.params.provider.Arguments;
  * 대상 클래스: {@link PalindromeValidator}, {@link Calculator}, {@link PasswordStrengthMeter}
  *
  * 진행 방법
- * 1. 아래 @Disabled 를 지운다.
- * 2. 각 메서드에 알맞은 @ParameterizedTest + Source 어노테이션을 붙인다.
+ * 1. 각 메서드에 알맞은 @ParameterizedTest + Source 어노테이션을 붙인다.
  *    (지금은 @ParameterizedTest 가 없어서 실행되지 않습니다)
- * 3. fail(...) 을 지우고 검증 코드를 작성한다.
+ * 2. abort(...) 을 지우고 검증 코드를 작성한다.
  */
-@Disabled("미션을 시작하려면 이 줄을 지우세요")
 @DisplayName("[미션 2] ParameterizedTest")
 class Mission2ParameterizedTest {
 
@@ -33,7 +31,7 @@ class Mission2ParameterizedTest {
     @DisplayName("2-1. 회문이면 true")
     void palindrome(String input) {
         // TODO: PalindromeValidator.isPalindrome(input) 이 true 인지 검증하세요.
-        fail("미션 2-1 을 완성하세요");
+        abort("미션 2-1 을 완성하세요");
     }
 
     // TODO: @ParameterizedTest 와 @NullSource 를 붙이세요.
@@ -42,7 +40,7 @@ class Mission2ParameterizedTest {
     @DisplayName("2-2. null 이면 false")
     void nullIsNotPalindrome(String input) {
         // TODO: PalindromeValidator.isPalindrome(input) 이 false 인지 검증하세요.
-        fail("미션 2-2 를 완성하세요");
+        abort("미션 2-2 를 완성하세요");
     }
 
     // TODO: @ParameterizedTest(name = "{0} + {1} = {2}") 와 @CsvSource 를 붙이세요.
@@ -51,7 +49,7 @@ class Mission2ParameterizedTest {
     @DisplayName("2-3. 덧셈")
     void add(int a, int b, int expected) {
         // TODO: new Calculator().add(a, b) 가 expected 인지 검증하세요.
-        fail("미션 2-3 을 완성하세요");
+        abort("미션 2-3 을 완성하세요");
     }
 
     // TODO: @ParameterizedTest 와 @CsvFileSource(resources = "/test-data.csv", numLinesToSkip = 1) 를 붙이세요.
@@ -60,7 +58,7 @@ class Mission2ParameterizedTest {
     @DisplayName("2-4. CSV 파일로 대문자 변환 검증")
     void toUpperCase(String given, String expected) {
         // TODO: given.toUpperCase() 가 expected 인지 검증하세요.
-        fail("미션 2-4 를 완성하세요");
+        abort("미션 2-4 를 완성하세요");
     }
 
     // TODO: @ParameterizedTest 와 @MethodSource("passwordProvider") 를 붙이세요.
@@ -68,7 +66,7 @@ class Mission2ParameterizedTest {
     @DisplayName("2-5. 암호 강도 측정")
     void passwordStrength(String password, PasswordStrength expected) {
         // TODO: new PasswordStrengthMeter().meter(password) 가 expected 인지 검증하세요.
-        fail("미션 2-5 를 완성하세요");
+        abort("미션 2-5 를 완성하세요");
     }
 
     static Stream<Arguments> passwordProvider() {

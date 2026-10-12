@@ -1,13 +1,12 @@
 package com.example.tdd.practice.mission;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.abort;
 import static org.mockito.BDDMockito.willReturn;
 
 import com.example.tdd.api.HelloTddController;
 import com.example.tdd.client.IntegrationClient;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,11 +19,9 @@ import org.junit.jupiter.api.Test;
  * given() - when() - then() 구조로 읽기 쉬운 테스트를 작성할 수 있습니다.
  *
  * 진행 방법
- * 1. 아래 @Disabled 를 지운다.
- * 2. 클래스/필드 어노테이션과 setUp 을 완성한다.
- * 3. 각 테스트의 fail(...) 을 지우고 TODO 를 채운다.
+ * 1. 클래스/필드 어노테이션과 setUp 을 완성한다.
+ * 2. 각 테스트의 abort(...) 을 지우고 TODO 를 채운다.
  */
-@Disabled("미션을 시작하려면 이 줄을 지우세요")
 @DisplayName("[미션 5] RestAssured")
 // TODO: 랜덤 포트로 실제 서버를 띄우는 어노테이션을 붙이세요.
 // 힌트: @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -58,7 +55,7 @@ class Mission5RestAssuredTest {
         //       .log().all()
         //       .statusCode(HttpStatus.OK.value())
         //       .body(equalTo(...));
-        fail("미션 5-1 을 완성하세요");
+        abort("미션 5-1 을 완성하세요");
     }
 
     @Test
@@ -68,7 +65,7 @@ class Mission5RestAssuredTest {
         //   힌트: willReturn("SUCCESS").given(integrationClient).callIntegration("tdd");
         //         (when/thenReturn, given/willReturn 어느 것이든 OK)
         // TODO 2: 요청을 보내고 본문이 "Hello, tdd! Integration is SUCCESS" 인지 검증하세요.
-        fail("미션 5-2 를 완성하세요");
+        abort("미션 5-2 를 완성하세요");
     }
 
     @Test
@@ -76,6 +73,6 @@ class Mission5RestAssuredTest {
     void notFound() {
         // TODO: GET /api/v1/unknown 을 호출하고 상태코드 404 를 검증하세요.
         // 힌트: .statusCode(HttpStatus.NOT_FOUND.value())
-        fail("미션 5-3 을 완성하세요");
+        abort("미션 5-3 을 완성하세요");
     }
 }

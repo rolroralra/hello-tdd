@@ -1,13 +1,12 @@
 package com.example.tdd.practice.mission;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.abort;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import com.example.tdd.api.HelloTddController;
 import com.example.tdd.client.IntegrationClient;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
@@ -22,11 +21,9 @@ import org.springframework.test.web.servlet.MockMvc;
  * MockMvc 는 실제 서버를 띄우지 않고 DispatcherServlet 을 통해 컨트롤러를 호출합니다.
  *
  * 진행 방법
- * 1. 아래 @Disabled 를 지운다.
- * 2. 클래스/필드 어노테이션을 완성한다.
- * 3. 각 테스트의 fail(...) 을 지우고 TODO 를 채운다.
+ * 1. 클래스/필드 어노테이션을 완성한다.
+ * 2. 각 테스트의 abort(...) 을 지우고 TODO 를 채운다.
  */
-@Disabled("미션을 시작하려면 이 줄을 지우세요")
 @DisplayName("[미션 4] MockMvc")
 // TODO: 웹 계층(Controller)만 로딩하는 슬라이스 테스트 어노테이션을 붙이세요.
 // 힌트: @WebMvcTest(HelloTddController.class)
@@ -48,14 +45,14 @@ class Mission4MockMvcTest {
         //       .andDo(print())
         //       .andExpect(status().isOk())
         //       .andExpect(content().string(...));
-        fail("미션 4-1 을 완성하세요");
+        abort("미션 4-1 을 완성하세요");
     }
 
     @Test
     @DisplayName("4-2. name 파라미터가 없으면 Hello, Developer!")
     void helloWithDefaultName() throws Exception {
         // TODO: 파라미터 없이 GET /api/v1/hello 를 호출하고 "Hello, Developer!" 를 검증하세요.
-        fail("미션 4-2 를 완성하세요");
+        abort("미션 4-2 를 완성하세요");
     }
 
     @Test
@@ -65,6 +62,6 @@ class Mission4MockMvcTest {
         //   힌트: given(integrationClient.callIntegration("tdd")).willReturn("SUCCESS");
         // TODO 2: 요청을 보내고 "Hello, tdd! Integration is SUCCESS" 를 검증하세요.
         // TODO 3 (보너스): integrationClient.callIntegration("tdd") 가 호출되었는지 verify 하세요.
-        fail("미션 4-3 을 완성하세요");
+        abort("미션 4-3 을 완성하세요");
     }
 }

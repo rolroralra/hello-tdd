@@ -2,7 +2,7 @@ package com.example.tdd.practice.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.abort;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
@@ -11,7 +11,6 @@ import com.example.tdd.user.email.EmailNotifier;
 import com.example.tdd.user.password.WeakPasswordChecker;
 import com.example.tdd.user.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,11 +22,9 @@ import org.junit.jupiter.api.Test;
  * 세 의존성 모두 Mock 으로 대체해서 UserRegister 의 동작만 검증해봅시다.
  *
  * 진행 방법
- * 1. 아래 @Disabled 를 지운다.
- * 2. 필드와 setUp 을 완성한다.
- * 3. 각 테스트의 fail(...) 을 지우고 TODO 를 채운다.
+ * 1. 필드와 setUp 을 완성한다.
+ * 2. 각 테스트의 abort(...) 을 지우고 TODO 를 채운다.
  */
-@Disabled("미션을 시작하려면 이 줄을 지우세요")
 @DisplayName("[미션 3] Mockito")
 // TODO: Mockito 어노테이션(@Mock, @Captor)이 동작하도록 확장을 등록하세요.
 // 힌트: @ExtendWith(MockitoExtension.class)
@@ -53,7 +50,7 @@ class Mission3MockitoTest {
         //   힌트: when(mock.method(arg)).thenReturn(value)
         //         또는 BDD 스타일 given(mock.method(arg)).willReturn(value)
         // TODO 2 (when/then): register("id", "pw", "email@test.com") 호출 시 예외가 발생하는지 검증하세요.
-        fail("미션 3-1 을 완성하세요");
+        abort("미션 3-1 을 완성하세요");
     }
 
     @Test
@@ -63,7 +60,7 @@ class Mission3MockitoTest {
         //   힌트: new User("id", "pw", "email@test.com")
         //   참고: passwordChecker 는 Stub 하지 않으면 기본값 false 를 반환합니다. (boolean 기본값)
         // TODO 2: register 호출 시 DuplicationIdException 이 발생하는지 검증하세요.
-        fail("미션 3-2 를 완성하세요");
+        abort("미션 3-2 를 완성하세요");
     }
 
     @Test
@@ -72,7 +69,7 @@ class Mission3MockitoTest {
         // TODO 1: 약한 암호 상황을 만들고 register 를 호출하세요. (예외는 assertThatThrownBy 로 잡기)
         // TODO 2: emailNotifier.sendRegisterEmail 이 한 번도 호출되지 않았는지 검증하세요.
         //   힌트: verify(mock, never()).method(anyString())
-        fail("미션 3-3 을 완성하세요");
+        abort("미션 3-3 을 완성하세요");
     }
 
     @Test
@@ -81,7 +78,7 @@ class Mission3MockitoTest {
         // TODO 1: register("id", "pw", "email@test.com") 를 호출하세요.
         // TODO 2: emailNotifier.sendRegisterEmail("email@test.com") 이 호출되었는지 검증하세요.
         //   힌트: verify(mock).method(arg)  -- times(1) 이 기본값입니다.
-        fail("미션 3-4 를 완성하세요");
+        abort("미션 3-4 를 완성하세요");
     }
 
     @Test
@@ -94,6 +91,6 @@ class Mission3MockitoTest {
         //         verify(userRepository).save(captor.capture());
         //         User saved = captor.getValue();
         //   (필드에 @Captor ArgumentCaptor<User> captor; 로 선언해도 됩니다)
-        fail("미션 3-5 를 완성하세요");
+        abort("미션 3-5 를 완성하세요");
     }
 }
