@@ -8,19 +8,20 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 class JunitLifecycleTest {
 
     @Nested
-    @TestInstance(Lifecycle.PER_CLASS)
+    @TestInstance(Lifecycle.PER_METHOD) // default
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-    class JunitPerClassTest {
+    @Order(1)
+    class JunitPerMethodTest {
         private final AtomicInteger counter = new AtomicInteger(0);
 
         @BeforeAll
         static void beforeAll() {
-            System.out.println("Before all outer test [" + JunitPerClassTest.class.getSimpleName() + "]");
+            System.out.println("Before all outer test [" + JunitPerMethodTest.class.getSimpleName() + "]");
         }
 
         @AfterAll
         static void afterAll() {
-            System.out.println("After all outer test  [" + JunitPerClassTest.class.getSimpleName() + "]");
+            System.out.println("After all outer test [" + JunitPerMethodTest.class.getSimpleName() + "]");
         }
 
         @BeforeEach
@@ -55,19 +56,20 @@ class JunitLifecycleTest {
     }
 
     @Nested
-    @TestInstance(Lifecycle.PER_METHOD)
+    @TestInstance(Lifecycle.PER_CLASS)
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-    class JunitPerMethodTest {
+    @Order(2)
+    class JunitPerClassTest {
         private final AtomicInteger counter = new AtomicInteger(0);
 
         @BeforeAll
         static void beforeAll() {
-            System.out.println("Before all outer test [" + JunitPerMethodTest.class.getSimpleName() + "]");
+            System.out.println("Before all outer test [" + JunitPerClassTest.class.getSimpleName() + "]");
         }
 
         @AfterAll
         static void afterAll() {
-            System.out.println("After all outer test [" + JunitPerMethodTest.class.getSimpleName() + "]");
+            System.out.println("After all outer test  [" + JunitPerClassTest.class.getSimpleName() + "]");
         }
 
         @BeforeEach

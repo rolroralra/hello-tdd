@@ -6,8 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
+import org.junit.jupiter.api.ClassOrderer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestClassOrder;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,10 +27,12 @@ import org.junit.jupiter.params.provider.ValueSource;
  * @see <a href=https://www.baeldung.com/parameterized-tests-junit-5>Guide to JUnit 5 Parameterized Tests (baeldung)</a>
  *
  */
+@TestClassOrder(ClassOrderer.OrderAnnotation.class)
 public class ParameterizedTestClassTest {
 
     @DisplayName("@ValueSource 테스트")
     @Nested
+    @Order(1)
     class ValueSourceTest {
         @ParameterizedTest(name = "\"{0}\" is a palindrome")
         @DisplayName("isPalindrome() 메서드가 회문 파라미터를 넘긴 경우, true를 반환한다.")
@@ -43,6 +48,7 @@ public class ParameterizedTestClassTest {
 
     @DisplayName("@EnumSource 테스트")
     @Nested
+    @Order(2)
     class EnumSourceTest {
         enum Topping { HAM, MUSHROOM, ONION, PEPPER, SAUSAGE }
 
@@ -55,6 +61,7 @@ public class ParameterizedTestClassTest {
 
     @DisplayName("@NullAndEmptySource 테스트")
     @Nested
+    @Order(3)
     class NullAndEmptySourceTest {
 
         @ParameterizedTest(name = "\"{0}\" is null or empty")
@@ -66,6 +73,7 @@ public class ParameterizedTestClassTest {
 
     @DisplayName("@CsvSource 테스트")
     @Nested
+    @Order(4)
     class CsvSourceTest {
 
         @DisplayName("toUpperCase() 메서드가 소문자를 대문자로 변환한다.")
@@ -82,6 +90,7 @@ public class ParameterizedTestClassTest {
 
     @DisplayName("@CsvFileSource 테스트")
     @Nested
+    @Order(5)
     class CsvFileSourceTest {
 
         @DisplayName("toUpperCase() 메서드가 소문자를 대문자로 변환한다.")
@@ -94,6 +103,7 @@ public class ParameterizedTestClassTest {
 
     @DisplayName("@MethodSource 테스트")
     @Nested
+    @Order(6)
     class MethodSourceTest {
 
         @DisplayName("String::length 메서드가 문자열의 길이를 반환한다.")
@@ -113,6 +123,7 @@ public class ParameterizedTestClassTest {
 
     @DisplayName("@ArgumentsSource 테스트")
     @Nested
+    @Order(7)
     class ArgumentsSourceTest {
         @DisplayName("CustomArgumentsProvider를 사용하여 테스트를 실행한다.")
         @ParameterizedTest(name = "argument \"{0}\"")
