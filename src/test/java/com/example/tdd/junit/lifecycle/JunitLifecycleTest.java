@@ -4,10 +4,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestClassOrder(ClassOrderer.OrderAnnotation.class)
 class JunitLifecycleTest {
 
     @Nested
     @TestInstance(Lifecycle.PER_CLASS)
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class JunitPerClassTest {
         private final AtomicInteger counter = new AtomicInteger(0);
 
@@ -36,6 +38,7 @@ class JunitLifecycleTest {
         }
 
         @Test
+        @Order(2)
         void test1() {
             int count = counter.get();
 
@@ -43,6 +46,7 @@ class JunitLifecycleTest {
         }
 
         @Test
+        @Order(1)
         void test2() {
             int count = counter.get();
 
@@ -52,6 +56,7 @@ class JunitLifecycleTest {
 
     @Nested
     @TestInstance(Lifecycle.PER_METHOD)
+    @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class JunitPerMethodTest {
         private final AtomicInteger counter = new AtomicInteger(0);
 
@@ -80,6 +85,7 @@ class JunitLifecycleTest {
         }
 
         @Test
+        @Order(2)
         void test1() {
             int count = counter.get();
 
@@ -87,6 +93,7 @@ class JunitLifecycleTest {
         }
 
         @Test
+        @Order(1)
         void test2() {
             int count = counter.get();
 
