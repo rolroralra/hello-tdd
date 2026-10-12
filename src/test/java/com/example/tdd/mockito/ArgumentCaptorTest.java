@@ -17,7 +17,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.ArgumentCaptor;
 
-public class ArgumentCaptorTest {
+class ArgumentCaptorTest {
     private UserRegister userRegister;
     private final StubWeakPasswordChecker stubWeakPasswordChecker = new StubWeakPasswordChecker();
     private final UserRepository fakeUserRepository = new MemoryUserRepository();

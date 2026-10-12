@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class MockitoExtensionTest {
+class MockitoExtensionTest {
     @Mock
     private List<String> mockList;
 
